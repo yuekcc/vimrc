@@ -35,7 +35,6 @@ nmap <Leader>p "+p
 inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <c-d> <del>
-inoremap <c-_> <c-k>
 
 " alt+hjkl 上下左右移动光标
 inoremap <m-j> <up>
