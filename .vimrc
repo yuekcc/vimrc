@@ -1,3 +1,6 @@
+" 补充 ~/.vim 到运行目录
+set rtp+=~/.vim
+
 " 设置英文界面
 set langmenu=en_US.UTF-8
 language en_US.UTF-8
@@ -23,14 +26,27 @@ set nocompatible
 " ------------------------------
 
 " gvim 设置
-set guifont=Maple\ Mono\ Normal\ NF\ CN:h14
-set guioptions-=T
-set guioptions-=m
-set guioptions-=L
-set guioptions-=r
-set guioptions-=b
-set guioptions-=e
-set nolist
+if has('gui')
+    " 设置 gvim 渲染引擎
+    set rop=type:directx
+    " 设置字体
+    set guifont=Maple\ Mono\ Normal\ NF\ CN:h13
+    " 关闭窗口菜单等
+    set guioptions-=T
+    set guioptions-=m
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=b
+    set guioptions-=e
+    set nolist
+
+    " 高亮当前行
+    set cursorline
+
+    set sessionoptions+=resize,winsize
+    autocmd VIMEnter * :source ~/.vim/session.vim
+    autocmd VIMLeave * :mksession! ~/.vim/session.vim
+endif
 
 " 行号
 set number
@@ -42,9 +58,6 @@ syntax on
 " 显示匹配的括号
 set showmatch
 set matchtime=2 " 匹配括号高亮显示的时间(1/10秒)
-
-" 高亮当前行
-set cursorline
 
 " 不显示启动消息
 set shortmess+=I
@@ -61,11 +74,15 @@ set termguicolors
 
 " 在状态行显示文件类型
 set statusline+=%{&filetype}
+set statusline=[%f]%m\ %y\ %r%=%l:%c,\ %L\ lines
+set laststatus=2
 
+set cmdheight=1
 
 " ------------------------------
 " 搜索设置
 " ------------------------------
+
 set ignorecase
 set smartcase
 set incsearch
@@ -122,8 +139,7 @@ let mapleader = " "
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
-" 快速打开 NERDTree (如果已安装)
-nnoremap <leader>n :NERDTreeToggle<CR>
+
 
 " 为方便复制到系统剪贴板
 vmap <Leader>y "+y
@@ -159,14 +175,15 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+
 " -----------------------------
 " 插件
 " -----------------------------
 
-" 加载插件管理器 (这里假设你想要使用 vim-plug)
-" call plug#begin('~/.vim/plugged')
-" 你可以在这里添加你想使用的插件
-" Plug 'junegunn/vim-easy-align'
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" call plug#end()
+call plug#begin('~/.vim/plugged')
+    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'editorconfig/editorconfig-vim'
+call plug#end()
 
+" 快速打开 NERDTree (如果已安装)
+nnoremap <leader>n :NERDTreeToggle<CR>
