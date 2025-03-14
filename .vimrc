@@ -20,6 +20,8 @@ set nowritebackup
 " 禁用 vi 兼容模式
 set nocompatible
 
+set novisualbell
+set noerrorbells
 
 " ------------------------------
 " UI 设置
@@ -43,9 +45,9 @@ if has('gui')
     " 高亮当前行
     set cursorline
 
-    set sessionoptions+=resize,winsize
-    autocmd VIMEnter * :source ~/.vim/session.vim
-    autocmd VIMLeave * :mksession! ~/.vim/session.vim
+    " set sessionoptions+=resize,winsize
+    " autocmd VIMEnter * :source ~/.vim/session.vim
+    " autocmd VIMLeave * :mksession! ~/.vim/session.vim
 endif
 
 " 行号
@@ -78,6 +80,8 @@ set statusline=[%f]%m\ %y\ %r%=%l:%c,\ %L\ lines
 set laststatus=2
 
 set cmdheight=1
+set showcmd
+set showmode
 
 " ------------------------------
 " 搜索设置
@@ -96,6 +100,8 @@ set hlsearch
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,gb18030
+set ffs=unix,dos,mac
+set termencoding=utf-8
 
 " 使用空格缩进，而不是制表符
 set expandtab
@@ -119,6 +125,10 @@ set breakindent
 " 设置 backspace 键模式
 set bs=eol,start,indent
 
+set completeopt=longest,menu
+set wildmenu
+set wildmode=longest,list,full
+set wildignore=*.o,*~,*.pyc,*.class
 
 " -----------------------------
 " keymaps
